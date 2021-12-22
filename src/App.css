@@ -1,38 +1,165 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar{
+  height: 80px;
+  background-color: bisque;
+}
+.nav-logo{
+  font-size: 25px;
+ padding-top: 30px;
+}
+.collapse ul {
+ font-size: 20px;
+ padding: 15px 30px 0px 0px;
+}
+.heading {
+  color: blue;
+}
+.row{
+  display: flex;
+  justify-content: center;
+}
+.incre-btn{
+  margin: 20px 10px 20px 0px;
+}
+.decre-btn{
+  margin: 20px 0px 20px 10px;
+}
+.count{
+  margin: 20px 0px 20px 0px;
+}
+.dlt-btn{
+  color: red;
+}
+.edit-btn{
+  color: blue;
+}
+main {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+main > h1 {
+  text-align: center;
+ 
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Add-article {
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  border-radius: 10px;
+}
+
+.Add-article input {
+  display: block;
+  margin: 1rem auto;
+  width: 20rem;
+  padding: 0.5rem;
+  border: 1px solid #00b8e6;
+  border-radius: 10px;
+  outline: none;
+}
+
+.Add-article button {
+  width: 21rem;
+  padding: 0.7rem;
+  border: 1px solid #00b8e6;
+  background: #00b8e6;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+}
+
+.Add-article button:hover {
+  background: #0093b8;
+}
+
+.Add-article button:disabled {
+  background: #d8d8d8;
+  border: 1px solid #d8d8d8;
+  cursor: not-allowed;
+}
+
+.Article {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 10px;
+  width: 500px;
+}
+
+.Article:not(:last-child) {
+  border-bottom: 2px solid #f5f6f7;
+}
+
+.Article h1 {
+  color: #222;
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.Article p {
+  padding-right: 1rem;
+  color: #444;
+}
+.btns{
+  display: flex;
+  justify-content: center;
+}
+.display{
+  display: flex;
+  justify-content: center;
+}
+.buttons{
+  margin: 50px 0px 30px 0px;
+}
+.btn{
+  font-size: 20px;
+  font-weight: bold;
+  width: 130px;
+  border-radius: 20px;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.active-btn{
+  margin-right: 20px;
+  background-color: blue;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.complete-btn{
+  margin-right: 20px;
+  background-color:tomato;
+  width: 150px;
+}
+.all-btn{
+  background-color:green;
+}
+.display{
+  display: flex;
+  justify-content: center;
+}
+.text-section{
+  font-size: 15px;
+  font-weight: bold;
+  color:saddlebrown;
+  border-style: none;
+  margin-bottom: 20px;
+}
+.edit-btn{
+  margin-right: 20px;
+}
+.comp-btn{
+  margin-right: 20px;
+}
+button{
+  border-style: none;
 }
