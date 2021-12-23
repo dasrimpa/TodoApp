@@ -4,11 +4,15 @@ import { Link } from "react-router-dom";
 import { Todo } from "../../../Interface/Todo.interface";
 import { RootState } from "../../../redux/store";
 import { addTodoActions} from "../../../redux/todo-reducer";
+import { BiEdit } from "react-icons/bi";
+import { BsFillArchiveFill } from "react-icons/bs";
 
 const DisplayTodos = ({ todos }: { 
   todos: Todo[];
+ 
 }) => {
   const [sort, setSort] = useState("active");
+  
   return (
     <div className="displaytodos">
       <div className="buttons">
@@ -40,9 +44,9 @@ const DisplayTodos = ({ todos }: {
             
            <div className="mx-4">
            <Link to={`/todo/edit/${todo.id}`}>
-              <button className="btn btn-primary">Edit</button>
+              <button className="btn btn-primary"><BiEdit/></button>
             </Link>
-            <button className="btn btn-danger">Delete</button>
+            <button className="btn btn-danger"><BsFillArchiveFill/></button>
            </div>
           </div>
         );
@@ -58,11 +62,9 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: any, state: any) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    addTodo: (obj: any) => dispatch(addTodoActions.addTodo(obj)),
-    removeTodo: (id: any) => dispatch(addTodoActions.removeTodo(id)),
-    updateTodo: (obj: any) => dispatch(addTodoActions.updateTodo(obj)),
+    removeTodo: (todo : Todo) => dispatch(addTodoActions.removeTodo(todo)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayTodos);

@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { Todo } from "../Interface/Todo.interface";
 
 const initialState: any[] = [
-  { id: 1, title: "Todo 1", completed: false },
+  { id: 1, title: "Task 1", completed: false },
+  { id: 2, title: "Task 2", completed: false },
 ];
 
 const todoSlice = createSlice({
@@ -15,8 +16,8 @@ const todoSlice = createSlice({
       return state;
     },
     
-    removeTodo: (state, action) => {
-      return state.filter((item) => item.id !== action.payload);
+    removeTodo: (state, { payload }: { payload: Todo }) => {
+      return state.filter((todo) => todo.id !==payload.id);
     },
 
     updateTodo: (state, { payload }: { payload: Todo }) => {

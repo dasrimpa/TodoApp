@@ -11,19 +11,6 @@ export default function AppWrapper() {
         <nav className="navbar navbar-default navbar-static-top">
           <div className="nav-container">
             <div className="navbar-header navbar-center">
-              <button
-                type="button"
-                className="navbar-toggle "
-                data-toggle="collapse"
-                data-target="#navbar"
-                aria-expanded="false"
-                aria-controls="navbar"
-              >
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-              </button>
               <a className="navbar-brand app-logo nav-logo" href="#">
                 TODO APP
               </a>
@@ -38,7 +25,6 @@ export default function AppWrapper() {
               <li className="nav-item">
                 <Link to="/todo/create" className="nav-link">Todo Add</Link>
               </li>
-              
             </ul>
           </div>
         </nav>
