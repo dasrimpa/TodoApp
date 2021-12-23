@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch: (arg0: { payload: any; type: string; }) =>
   return {
     addTodo: (obj: any) => dispatch(addTodos(obj)),
     removeTodo: (id: any) => dispatch(removeTodos(id)),
-    updateTodo: (id: any) => dispatch(updateTodos(id)),
+    updateTodo: (obj: any) => dispatch(updateTodos(obj)),
     completeTodo: (id: any) => dispatch(completeTodos(id)),
   };
 };

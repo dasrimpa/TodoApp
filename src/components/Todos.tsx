@@ -26,7 +26,6 @@ const getDatafromLS=()=>{
 
 const Todos = (props: { addTodo: (arg0: { id: number; item: string; completed: boolean; }) => void; todos: any[]; }) => {
   
-  console.log("props",props);
   const [todo, setTodo] = useState("");
   const anyName= useNavigate();
 
@@ -70,7 +69,6 @@ const Todos = (props: { addTodo: (arg0: { id: number; item: string; completed: b
         Add Todo
       </button>
     </form>
-        
     </div>
   );
 };

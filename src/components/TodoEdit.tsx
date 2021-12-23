@@ -3,11 +3,21 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { updateTodos } from '../redux/reducer'
+import { connect } from "react-redux";
+const mapStateToProps = (state: any) => {
+  return {
+    todos: state,
+  };
+};
+const mapDispatchToProps = (dispatch: (arg0: { payload: any; type: string; }) => any) => {
+  return {
+    updateTodo: (obj: any) => dispatch(updateTodos(obj)),
+  };
+};
 
-export const TodoEdit = (item:any) => {
+const TodoEdit =(props: { updateTodo: (arg0: { id: number; item: string; completed: boolean; }) => void; todos: any[]; })=> {
   const { id } = useParams();
-  const todoedit =useSelector((state: any) => state);
-  let number = "321";
+  const todoedit =useSelector((state: any) => state.todos.value);
   const currenttodo = item.find((item: { id: any })=>item.id ===parseInt({id}))
 
   const [todo, setTodo] = useState(item.id)
@@ -40,10 +50,11 @@ export const TodoEdit = (item:any) => {
      
         ): 
           (
-            <h1 className="text-center">No Contact Found</h1>
+            <h1 className="text-center">No todo Found</h1>
           )}
       
         </div>
     </div>
   )
 }
+export default connect(mapStateToProps, mapDispatchToProps)(TodoEdit);

@@ -16,31 +16,6 @@
 .heading {
   color: blue;
 }
-.row{
-  display: flex;
-  justify-content: center;
-}
-.incre-btn{
-  margin: 20px 10px 20px 0px;
-}
-.decre-btn{
-  margin: 20px 0px 20px 10px;
-}
-.count{
-  margin: 20px 0px 20px 0px;
-}
-.dlt-btn{
-  color: red;
-}
-.edit-btn{
-  color: blue;
-}
-main {
-  max-width: 300px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
 main > h1 {
   text-align: center;
  
