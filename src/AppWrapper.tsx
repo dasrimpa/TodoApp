@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import { TodoList } from "./Pages/Todo/List";
 import TodoWrapper from "./Pages/Todo/TodoWrapper";
 import TodoForm from "./Pages/Todo/Action";
+import { Home } from "./Pages/Todo/List/Home";
 
 export default function AppWrapper() {
   return (
@@ -17,7 +18,7 @@ export default function AppWrapper() {
             </div>
             <ul className="nav">
               <li className="nav-item">
-                <Link to="/" className="nav-link">Home</Link>
+                <Link to="/todo/homepage" className="nav-link">Home</Link>
               </li>
               <li className="nav-item">
                 <Link to="/todo/list" className="nav-link">Todo List</Link>
@@ -33,6 +34,7 @@ export default function AppWrapper() {
             <Route path="list" element={<TodoList />} />
             <Route path="create" element={<TodoForm />} />
             <Route path="edit/:id" element={<TodoForm />} />
+            <Route path="homepage" element={<Home />} />
           </Route>
         </Routes>
       </div>

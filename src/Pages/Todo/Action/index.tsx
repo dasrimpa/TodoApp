@@ -45,16 +45,18 @@ const TodoForm = ({ addTodo, todoList, updateTodo }: {
     } else {
       if (params.id && selectedTodo) {
         updateTodo({ ...selectedTodo, title });
+        alert("Updated Successfully");
       } else {
         addTodo({
           id: Math.floor(Math.random() * 1000),
           completed: false,
           title,
         });
+        alert("Added Successfully");
       }
       
       setTitle("");
-      alert("Added Successfully");
+    
       navigate("/todo/list");
     }
   };
