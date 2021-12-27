@@ -20,6 +20,7 @@ const DisplayTodos = ({ todos }: {
   
   return (
     <div className="displaytodos">
+       <Link to="/todo/create"><button className="list-btn">Todo Add</button></Link>
       <div className="buttons">
         <button className="active-btn btn" onClick={() => setSort("active")}>
           Active

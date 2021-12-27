@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addTodoActions } from "../../../redux/todo-reducer";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../../redux/store";
 import { Todo } from "../../../Interface/Todo.interface";
 
@@ -67,6 +67,7 @@ const TodoForm = ({ addTodo, todoList, updateTodo }: {
 
   return (
     <div className="addTodos">
+      <Link to="/todo/list"><button className="list-btn">Todo List</button></Link>
       <h1>Todo {params.id ? 'Edit' : 'Create'}</h1>
       <form className="Add-article">
         <input
