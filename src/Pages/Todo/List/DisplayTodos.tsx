@@ -6,6 +6,7 @@ import { RootState } from "../../../redux/store";
 import { addTodoActions} from "../../../redux/todo-reducer";
 import { BiEdit } from "react-icons/bi";
 import { BsFillArchiveFill } from "react-icons/bs";
+import Api from "../../../Api";
 
 const DisplayTodos = ({ todos }: { 
   todos: Todo[];

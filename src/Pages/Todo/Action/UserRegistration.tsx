@@ -67,3 +67,4 @@ export const UserRegistration: FC<{}> = (): ReactElement => {
     </div>
   );
 };
+

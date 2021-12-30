@@ -5,6 +5,7 @@ import { addTodoActions } from "../../../redux/todo-reducer";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../../redux/store";
 import { Todo } from "../../../Interface/Todo.interface";
+import Api from "../../../Api";
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -39,7 +40,7 @@ const TodoForm = ({ addTodo, todoList, updateTodo }: {
     }
   }, [])
 
-  const add = () => {
+  const add = async() => {
     if (title === "") {
       alert("Input is Empty");
     } else {
@@ -59,6 +60,21 @@ const TodoForm = ({ addTodo, todoList, updateTodo }: {
     
       navigate("/todo/list");
     }
+    
+    try {
+  
+     const response = await Api.post("/classes/todo",{
+      title:title
+     },);
+     console.log('response', response);
+     console.log("success");
+     return true;
+     
+    } catch (error) {
+      alert(`Error! ${error}`);
+
+    }
+    
   };
 
   const setTitleText = (titleText: string) => {
@@ -69,19 +85,22 @@ const TodoForm = ({ addTodo, todoList, updateTodo }: {
     <div className="addTodos">
       <Link to="/todo/list"><button className="list-btn">Todo List</button></Link>
       <h1>Todo {params.id ? 'Edit' : 'Create'}</h1>
-      <form className="Add-article">
+      {/* <form className="Add-article"> */}
+      <div className="Add-article">
         <input
           type="text"
           onChange={(e) => setTitleText(e.target.value)}
           className="todo-input"
           placeholder="Add an Item"
           value={title}
+          
         />
 
         <button className="add-btn" onClick={() => add()}>
           { params.id ? 'Update': 'Create'} Todo
         </button>
-      </form>
+      {/* </form> */}
+      </div>
     </div>
   );
 };
