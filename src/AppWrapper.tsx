@@ -3,10 +3,8 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import { TodoList } from "./Pages/Todo/List";
 import TodoWrapper from "./Pages/Todo/TodoWrapper";
 import TodoForm from "./Pages/Todo/Action";
-import { Home } from "./Pages/Todo/List/Home";
 import { UserRegistration } from "./Pages/Todo/Action/UserRegistration";
 import { UserLogin } from "./Pages/Todo/Action/UserLogin";
-import Fetch from "./Pages/Todo/List/Fetch";
 
 export default function AppWrapper() {
   return (
@@ -25,10 +23,7 @@ export default function AppWrapper() {
               </li>
           
               <li className="nav-item">
-                <Link to="/todo/userlogin" className="nav-link">Signin</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/todo/homepage" className="nav-link">list</Link>
+                <Link to="/todo/userlogin" className="nav-link">Login</Link>
               </li>
              
 
@@ -40,7 +35,6 @@ export default function AppWrapper() {
             <Route path="list" element={<TodoList />} />
             <Route path="create" element={<TodoForm />} />
             <Route path="edit/:id" element={<TodoForm />} />
-            <Route path="homepage" element={<Fetch />} />
             <Route path="userregistration" element={<UserRegistration />} />
             <Route path="userlogin" element={<UserLogin />} />
           </Route>

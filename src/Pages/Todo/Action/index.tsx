@@ -49,10 +49,11 @@ const TodoForm = ({ addTodo, todoList, updateTodo }: {
         alert("Updated Successfully");
       } else {
         addTodo({
-          id: Math.floor(Math.random() * 1000),
-          completed: false,
-          title,
-        });
+  id: Math.floor(Math.random() * 1000),
+  completed: false,
+  title,
+  objectId: ""
+});
         alert("Added Successfully");
       }
       
@@ -83,8 +84,10 @@ const TodoForm = ({ addTodo, todoList, updateTodo }: {
 
   return (
     <div className="addTodos">
-      <Link to="/todo/list"><button className="list-btn">Todo List</button></Link>
+       <Link to="/todo/list"><button type="button" className="btn btn-outline-primary list-btn">Todo List</button></Link>
       <h1>Todo {params.id ? 'Edit' : 'Create'}</h1>
+     
+     
       {/* <form className="Add-article"> */}
       <div className="Add-article">
         <input
@@ -101,6 +104,7 @@ const TodoForm = ({ addTodo, todoList, updateTodo }: {
         </button>
       {/* </form> */}
       </div>
+    
     </div>
   );
 };
