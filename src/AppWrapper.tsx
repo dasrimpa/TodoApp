@@ -34,7 +34,7 @@ export default function AppWrapper() {
           <Route path="/todo" element={<TodoWrapper />}>
             <Route path="list" element={<TodoList />} />
             <Route path="create" element={<TodoForm />} />
-            <Route path="edit/:id" element={<TodoForm />} />
+            <Route path="edit/:objectId" element={<TodoForm />} />
             <Route path="userregistration" element={<UserRegistration />} />
             <Route path="userlogin" element={<UserLogin />} />
           </Route>

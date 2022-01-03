@@ -26,69 +26,81 @@ const TodoForm = ({ addTodo, todoList, updateTodo }: {
    todoList: Todo[],
   }) => {
   const [title, setTitle] = useState<string>('');
+  const [updatelist, setUpdatelist] =useState<string>('');
   const navigate = useNavigate();
   const params = useParams();
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
   
   useEffect(() => {
-    if (params.id) {
-      const todoItem = todoList.find(t => t.id === Number(params.id));
+    if (params.objectId) {
+      const todoItem = todoList.find(t => t.objectId === String(params.objectId));
       if (todoItem) {
         setTitle(todoItem?.title);
         setSelectedTodo(todoItem);
       }
     }
   }, [])
-
+// const submit=()=>{
+//   objectId? 'updateList()' : 'add()';
+// }
   const add = async() => {
     if (title === "") {
       alert("Input is Empty");
     } else {
-      if (params.id && selectedTodo) {
-        updateTodo({ ...selectedTodo, title });
-        alert("Updated Successfully");
-      } else {
-        addTodo({
-  id: Math.floor(Math.random() * 1000),
-  completed: false,
-  title,
-  objectId: ""
-});
-        alert("Added Successfully");
-      }
+//       if (params.id && selectedTodo) {
+//         updateTodo({ ...selectedTodo, title });
+//         alert("Updated Successfully");
+//       } else {
+//         addTodo({
+//   id: Math.floor(Math.random() * 1000),
+//   completed: false,
+//   title,
+//   objectId: ""
+// });
+//         alert("Added Successfully");
+//       }
       
-      setTitle("");
+//       setTitle("");
     
-      navigate("/todo/list");
-    }
+//       navigate("/todo/list");
+//     }
     
     try {
-  
      const response = await Api.post("/classes/todo",{
       title:title
      },);
      console.log('response', response);
      console.log("success");
+     alert("Added Successfully");
+     navigate("/todo/list");
      return true;
      
     } catch (error) {
       alert(`Error! ${error}`);
 
     }
+  }
     
   };
 
-  const setTitleText = (titleText: string) => {
-    setTitle(titleText);
-  };
-
+  const updateList = async(objectId :string) =>{
+    try{
+    const response= await Api.put(`/classes/todo/${objectId}`,title);
+      console.log(response.data)
+      // const todoItem = data.find(todo => todo.objectId === String(params.objectId));
+      }
+      catch (error) {
+        console.log(error)
+      }
+    };
+ 
+    const setTitleText = (titleText: string) => {
+      setTitle(titleText);
+    };
   return (
     <div className="addTodos">
        <Link to="/todo/list"><button type="button" className="btn btn-outline-primary list-btn">Todo List</button></Link>
-      <h1>Todo {params.id ? 'Edit' : 'Create'}</h1>
-     
-     
-      {/* <form className="Add-article"> */}
+      <h1>Todo {params.objectId ? 'Edit' : 'Create'}</h1>
       <div className="Add-article">
         <input
           type="text"
@@ -96,13 +108,10 @@ const TodoForm = ({ addTodo, todoList, updateTodo }: {
           className="todo-input"
           placeholder="Add an Item"
           value={title}
-          
         />
-
         <button className="add-btn" onClick={() => add()}>
-          { params.id ? 'Update': 'Create'} Todo
+          { params.objectId ? 'Update': 'Create'} Todo
         </button>
-      {/* </form> */}
       </div>
     
     </div>

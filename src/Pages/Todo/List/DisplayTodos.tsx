@@ -3,7 +3,7 @@ import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Todo } from "../../../Interface/Todo.interface";
 import { RootState } from "../../../redux/store";
-import { addTodoActions} from "../../../redux/todo-reducer";
+import todoReducer, { addTodoActions} from "../../../redux/todo-reducer";
 import { BiEdit } from "react-icons/bi";
 import { BsFillArchiveFill } from "react-icons/bs";
 import Api from "../../../Api";
@@ -12,41 +12,40 @@ const DisplayTodos = ({ todos }: {
   todos: Todo[];
 }) => {
   const [sort, setSort] = useState("active");
-  const [data, setData] = useState([]);
-  const [state, setState] = useState({ title: [] });
+  const [data, setData] = useState<Todo[]>([]);
 
   const dispatch = useDispatch();
   // const deleteTodo = React.useCallback(
   //   (todo) => dispatch(addTodoActions.removeTodo(todo)),
   //   [dispatch, removeTodo]
   // );
+
+  async function fetchData() {
+    try {
+      const response = await Api.get(`/classes/todo`)
+      console.log(response.data.results);
+      console.log("success");
+      const result=response.data.results;
+      setData(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     fetchData();
-
-    async function fetchData() {
-      try {
-        const response = await Api.get(`/classes/todo`)
-        console.log(response.data.results);
-        console.log("success");
-        const result=response.data.results;
-        setData(result);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    
   }, [])
-const deleteTodo =async (objectId: string | undefined) => {
-  const response= await Api.delete(`/classes/todo/${objectId}`)
-  .then((response) => {
-    console.log(response.data);
-    const res= response.data;
-    setState(res);
-    return true;
-   
-})
-.catch((e) => console.log('something went wrong!', e));
-}
+
+const deleteTodo =async (objectId: string) => {
+  try{
+  await Api.delete(`/classes/todo/${objectId}`);
+  const filteredItems = data.filter((todo => todo.objectId !== objectId));
+  setData(filteredItems);
+  }
+  catch (error) {
+    console.log(error)
+  }
+};
 
   const renderTable = () => {
     return data.map((todo: Todo) => {
@@ -54,8 +53,8 @@ const deleteTodo =async (objectId: string | undefined) => {
         <tr key={todo.objectId}>
           <td>{todo.objectId}</td>
           <td>{todo.title}</td>
-          <td><BiEdit className="edit-btn"/></td>
-          <td><button onClick={() => deleteTodo(todo.objectId)}><BsFillArchiveFill className="delete-btn"/></button></td>
+          <td><Link to={`/todo/edit/${todo.objectId}`}><BiEdit className="edit-btn"/></Link></td>
+          <td><button onClick={() => deleteTodo(String(todo.objectId))}><BsFillArchiveFill className="delete-btn"/></button></td>
         </tr>
       )
     })
@@ -87,13 +86,12 @@ const deleteTodo =async (objectId: string | undefined) => {
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
-      <th scope="col">Edit List</th>
+      <th scope="col">Edit Item</th>
       <th scope="col">Delete Item</th>
     </tr>
   </thead>
   <tbody>
   {renderTable()}
-  
   </tbody>
 </table>
 
@@ -127,13 +125,6 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-
 export default connect(mapStateToProps)(DisplayTodos);
-function removeTodo(todo: Todo): any {
-  throw new Error("Function not implemented.");
-}
 
-function fetchData() {
-  throw new Error("Function not implemented.");
-}
 
