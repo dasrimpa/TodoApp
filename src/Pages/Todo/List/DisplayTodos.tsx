@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Todo } from "../../../Interface/Todo.interface";
 import { RootState } from "../../../redux/store";
-import todoReducer, { addTodoActions} from "../../../redux/todo-reducer";
+import  { todoActions} from "../../../redux/todo-reducer";
 import { BiEdit } from "react-icons/bi";
 import { BsFillArchiveFill } from "react-icons/bs";
 import Api from "../../../Api";
@@ -14,7 +15,7 @@ const DisplayTodos = ({ todos }: {
   const [sort, setSort] = useState("active");
   const [data, setData] = useState<Todo[]>([]);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const deleteTodo = React.useCallback(
   //   (todo) => dispatch(addTodoActions.removeTodo(todo)),
   //   [dispatch, removeTodo]
@@ -25,8 +26,9 @@ const DisplayTodos = ({ todos }: {
       const response = await Api.get(`/classes/todo`)
       console.log(response.data.results);
       console.log("success");
-      const result=response.data.results;
+      const result = response.data.results;
       setData(result);
+      dispatch(todoActions.listUpdate(result));
     } catch (error) {
       console.error(error);
     }
@@ -122,7 +124,7 @@ const deleteTodo =async (objectId: string) => {
 
 const mapStateToProps = (state: RootState) => {
   return {
-    todos: state.todos,
+    todos: state.todos.todoList,
   };
 };
 
