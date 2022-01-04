@@ -14,7 +14,7 @@ const DisplayTodos = ({ todos }: {
   const [sort, setSort] = useState("active");
   const [data, setData] = useState<Todo[]>([]);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const deleteTodo = React.useCallback(
   //   (todo) => dispatch(addTodoActions.removeTodo(todo)),
   //   [dispatch, removeTodo]
@@ -37,6 +37,7 @@ const DisplayTodos = ({ todos }: {
   }, [])
 
 const deleteTodo =async (objectId: string) => {
+
   try{
   await Api.delete(`/classes/todo/${objectId}`);
   const filteredItems = data.filter((todo => todo.objectId !== objectId));

@@ -26,24 +26,11 @@ const TodoForm = ({ addTodo, todoList, updateTodo }: {
    todoList: Todo[],
   }) => {
   const [title, setTitle] = useState<string>('');
-  const [updatelist, setUpdatelist] =useState<string>('');
   const navigate = useNavigate();
   const params = useParams();
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
-  
-  useEffect(() => {
-    if (params.objectId) {
-      const todoItem = todoList.find(t => t.objectId === String(params.objectId));
-      if (todoItem) {
-        setTitle(todoItem?.title);
-        setSelectedTodo(todoItem);
-      }
-    }
-  }, [])
-// const submit=()=>{
-//   objectId? 'updateList()' : 'add()';
-// }
-  const add = async() => {
+
+  const addList = async() => {
     if (title === "") {
       alert("Input is Empty");
     } else {
@@ -83,17 +70,38 @@ const TodoForm = ({ addTodo, todoList, updateTodo }: {
     
   };
 
-  const updateList = async(objectId :string) =>{
+  const updateList = async({objectId} :any, {data}:any) => {
     try{
     const response= await Api.put(`/classes/todo/${objectId}`,title);
       console.log(response.data)
-      // const todoItem = data.find(todo => todo.objectId === String(params.objectId));
+      alert("updated Successfully");
+       const todoItem = data.find((todo: { objectId: string; }) => todo.objectId === String(params.objectId));
+       setTitle(todoItem?.title);
+       setSelectedTodo(todoItem);
       }
       catch (error) {
         console.log(error)
       }
     };
- 
+    
+    // useEffect(() => {
+    //   updateList();
+    // }, [])
+  
+    // useEffect(() => {
+  //   if (params.objectId) {
+  //     const todoItem = todoList.find(t => t.objectId === String(params.objectId));
+  //     if (todoItem) {
+  //       setTitle(todoItem?.title);
+  //       setSelectedTodo(todoItem);
+  //     }
+  //   }
+  // }, [])
+    
+// const submit=()=>{
+//   params.objectId? 'updateList()' : 'addList()';
+// }
+
     const setTitleText = (titleText: string) => {
       setTitle(titleText);
     };
@@ -109,7 +117,7 @@ const TodoForm = ({ addTodo, todoList, updateTodo }: {
           placeholder="Add an Item"
           value={title}
         />
-        <button className="add-btn" onClick={() => add()}>
+        <button className="add-btn" onClick={() => addList()}>
           { params.objectId ? 'Update': 'Create'} Todo
         </button>
       </div>
