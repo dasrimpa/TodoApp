@@ -21,7 +21,6 @@ const mapDispatchToProps = (dispatch: any) => {
 };
 
 const TodoForm = ({
-  addTodo,
   todoList,
   updateTodo,
 }: {
@@ -81,6 +80,7 @@ const TodoForm = ({
         completed: false,
       });
       alert("updated Successfully");
+      navigate("/todo/list");
     } catch (error) {
       console.log(error);
     }

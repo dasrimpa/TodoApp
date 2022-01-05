@@ -3,3 +3,9 @@ export interface Todo {
   completed: boolean;
   objectId?:string;
 }
+
+export interface User{
+  name: string;
+  email :string;
+  password: string;
+}

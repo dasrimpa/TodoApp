@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import { TodoList } from "./Pages/Todo/List";
 import TodoWrapper from "./Pages/Todo/TodoWrapper";
 import TodoForm from "./Pages/Todo/Action";
-import { UserRegistration } from "./Pages/Todo/Action/UserRegistration";
-import { UserLogin } from "./Pages/Todo/Action/UserLogin";
+import  UserRegistration  from "./Pages/Todo/Action/UserRegistration";
+import UserLogin  from "./Pages/Todo/Action/UserLogin";
 
 export default function AppWrapper() {
   return (
@@ -13,9 +13,9 @@ export default function AppWrapper() {
         <nav className="navbar navbar-default navbar-static-top">
           <div className="nav-container">
             <div className="navbar-header navbar-center">
-              <a className="navbar-brand app-logo nav-logo" href="#">
+              <span className="navbar-brand app-logo nav-logo">
                 TODO APP
-              </a>
+              </span>
             </div>
             <ul className="nav">
             <li className="nav-item">
@@ -23,7 +23,7 @@ export default function AppWrapper() {
               </li>
           
               <li className="nav-item">
-                <Link to="/todo/userlogin" className="nav-link">Login</Link>
+                <Link to="/todo/userlogin" className="nav-link">SignIn</Link>
               </li>
 
               <li className="nav-item">

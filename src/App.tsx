@@ -1,5 +1,4 @@
 import React from 'react';
-import Api from './Api';
 import './App.css';
 import AppWrapper from './AppWrapper';
 function App() {

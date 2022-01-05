@@ -12,7 +12,6 @@ import Api from "../../../Api";
 const DisplayTodos = ({ todos }: { 
   todos: Todo[];
 }) => {
-  const [sort, setSort] = useState("active");
   const [data, setData] = useState<Todo[]>([]);
 
   const dispatch = useDispatch();
@@ -68,18 +67,17 @@ const deleteTodo =async (objectId: string) => {
     <Link to="/todo/create"><button type="button" className="btn btn-outline-primary list-btn">Add Todo</button></Link>
     <h2>Todo List</h2>
       <div className="buttons">
-        <button className="active-btn btn" onClick={() => setSort("active")}>
+        <button className="active-btn btn">
           Active
         </button>
 
         <button
           className="complete-btn btn"
-          onClick={() => setSort("completed")}
         >
           Completed
         </button>
 
-        <button className="all-btn btn" onClick={() => setSort("all")}>
+        <button className="all-btn btn">
           All
         </button>
       </div>

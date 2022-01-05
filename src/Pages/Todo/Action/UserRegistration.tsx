@@ -1,19 +1,24 @@
-import React, { useState, FC, ReactElement } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from 'react-router-dom';
 import Api from '../../../Api';
-export const UserRegistration: FC<{}> = (): ReactElement => {
-  
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+import { FaUserAlt } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { User } from '../../../Interface/Todo.interface';
 
-  const userRegistration = async ()=> {
-    
-        try {
-      const response = await Api.post("/classes/Userdetails",{
-     username:username,password:password
+const UserRegistration: React.FC = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+const navigate = useNavigate();
+  const { register, formState: { errors },handleSubmit } = useForm<User>();
+  const onSubmit = async () =>{
+
+    try {
+      const response = await Api.post("/classes/Userdetails",{username:name,password:password,email:email
      },);
-     console.log(response.data);
+     console.log("response",response);
      console.log("success");
       alert(
         `successfully created!`,
@@ -21,44 +26,83 @@ export const UserRegistration: FC<{}> = (): ReactElement => {
       navigate("/todo/userlogin");
       return true;
         
-    } catch (error: any) {
-        // signUp can fail if any parameter is blank or failed an uniqueness check on the server
+    } catch (error) {
         alert(`Error! ${error}`);
         return false;
     };
   };
 
   return (
-    <div>
+    <div className="App">
+     <div className="signup-form">
+    <form onSubmit={handleSubmit(onSubmit)}>
+		<h2>Sign Up</h2>
+		<p>Please fill in this form to create an account!</p>
+		<hr/>
+        <div className="form-group">
+			<div className="input-group">
+				<div className="input-group-prepend">
+					<span className="input-group-text">
+          <FaUserAlt />
+					</span>                    
+				</div>
+				<input {...register("name", { required: true, pattern: /[A-Za-z]/})}
+           onChange={(e) => setName(e.target.value)}
+           placeholder='Enter Full Name'
+           className="form-control" />
+			</div>
+      {errors.name && <div>Name is required.</div>}
+      {errors?.name?.type === "pattern" && (
+          <div>Name only with alphabet.</div>
+        )}
+        </div>
        
-      <div className='container'>
-        <h2 className="heading">{'User Registration'}</h2>
-        <div className="form_wrapper">
-          <input
-            value={username}
-            onChange={(event: { target: { value: React.SetStateAction<string>; }; }) => setUsername(event.target.value)}
-            placeholder="Enter Username"
-            className="form_input"
-          />
-          <input
-            value={password}
-            onChange={(event: { target: { value: React.SetStateAction<string>; }; }) => setPassword(event.target.value)}
-            placeholder="Enter Password"
-            className="form_input"
-          />
+        <div className="form-group">
+			<div className="input-group">
+				<div className="input-group-prepend">
+					<span className="input-group-text">
+						<MdEmail />
+					</span>                    
+				</div>
+				<input  {...register("email",{required :true,
+           pattern: /.+@.+/})}
+           onChange={(e) => setEmail(e.target.value)}
+           placeholder='Enter Email Address'
+           className='form-control'/>
+			</div>
+      {errors?.email?.type === "required" && (
+          <div>Email is required.</div>
+        )}
+         {errors?.email?.type === "pattern" && (
+          <div>Email should be in xxx@yyy.zzz format.</div>
+        )}
         </div>
-        <br/>
-        <div className="form_buttons">
-          <button
-            onClick={() => userRegistration()}
-            className="form_button btn-primary"
-          >
-            Sign Up
-          </button>
+		<div className="form-group">
+			<div className="input-group">
+				<div className="input-group-prepend">
+					<span className="input-group-text">
+						<i className="fa fa-lock"></i>
+					<RiLockPasswordFill/>
+					</span>                    
+				</div>
+				<input {...register("password", { required: true })}
+           onChange={(e) => setPassword(e.target.value)}
+           placeholder='Enter Password'
+           className='form-control'/>
+			</div>
+      {errors.password && (
+          <div>Password is required.</div>
+        )}
         </div>
-        <p className="form__hint">Already have an account? <Link to="/todo/userlogin" className="form__link">Login</Link></p>
-      </div>
+		<div className="form-group">
+            <button type="submit" className="btn btn-primary btn-lg">Sign Up</button>
+        </div>
+    </form>
+	<div className="text-center">Already have an account? <Link to="/todo/userlogin" className="form__link">Login</Link></div>
+</div>
     </div>
   );
 };
+
+export default UserRegistration;
 
