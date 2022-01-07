@@ -26,7 +26,7 @@ const navigate = useNavigate();
       navigate("/todo/userlogin");
       return true;
         
-    } catch (error) {
+    } catch (error:any) {
         alert(`Error! ${error}`);
         return false;
     };
@@ -51,9 +51,9 @@ const navigate = useNavigate();
            placeholder='Enter Full Name'
            className="form-control" />
 			</div>
-      {errors.name && <div>Name is required.</div>}
+      {errors.name && <div className='errorMessage'>Name is required.</div>}
       {errors?.name?.type === "pattern" && (
-          <div>Name only with alphabet.</div>
+          <div className='errorMessage'>Name only with alphabet.</div>
         )}
         </div>
        
@@ -71,10 +71,10 @@ const navigate = useNavigate();
            className='form-control'/>
 			</div>
       {errors?.email?.type === "required" && (
-          <div>Email is required.</div>
+          <div className='errorMessage'>Email is required.</div>
         )}
          {errors?.email?.type === "pattern" && (
-          <div>Email should be in xxx@yyy.zzz format.</div>
+          <div className='errorMessage'>Email should be in xxx@yyy.zzz format.</div>
         )}
         </div>
 		<div className="form-group">
@@ -91,7 +91,7 @@ const navigate = useNavigate();
            className='form-control'/>
 			</div>
       {errors.password && (
-          <div>Password is required.</div>
+          <div className='errorMessage'>Password is required.</div>
         )}
         </div>
 		<div className="form-group">

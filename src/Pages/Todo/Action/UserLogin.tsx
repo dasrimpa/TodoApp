@@ -4,17 +4,42 @@ import { Link, useNavigate } from 'react-router-dom';
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { User } from '../../../Interface/Todo.interface';
+import Api from '../../../Api';
 
 const UserLogin: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email] = useState<string>('');
+  const [data, setData] = useState<User[]>([]);
 const navigate = useNavigate();
   const { register, formState: { errors },handleSubmit } = useForm<User>();
+
+  async function getData() {
+    try {
+      const response = await Api.get(`/classes/Userdetails`)
+      console.log(response.data.results);
+      const result = response.data.results;
+      setData(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const onSubmit = async () =>{
-alert("Login successfull");
-navigate("/todo/create")
+    try{
+    const user = data.find(user => user.email === email)
+    if (!user) {
+      alert("error")
+    }
+    else{
+      alert("Login successfull");
+      navigate("/todo/create")
+    }
+  }
+  catch(error){
+    console.log(error)
+  }
   };
 
+ 
   return (
     <div className="App">
      <div className="signup-form">
@@ -29,12 +54,11 @@ navigate("/todo/create")
 					</span>                    
 				</div>
 				<input  {...register("email",{required :true})}
-           onChange={(e) => setEmail(e.target.value)}
            placeholder='enter your email'
            className='form-control'/>
 			</div>
       {errors?.email?.type === "required" && (
-          <div>Email is required.</div>
+          <div className='errorMessage'>Email is required.</div>
         )}
         </div>
 		<div className="form-group">
@@ -45,12 +69,11 @@ navigate("/todo/create")
 					</span>                    
 				</div>
 				<input {...register("password", { required: true })}
-           onChange={(e) => setPassword(e.target.value)}
            placeholder='enter your password'
            className='form-control'/>
 			</div>
       {errors.password && (
-          <div>Password is required.</div>
+          <div className='errorMessage'>Password is required.</div>
         )}
         </div>
 		<div className="form-group">
@@ -64,4 +87,3 @@ navigate("/todo/create")
 };
 
 export default UserLogin;
-
