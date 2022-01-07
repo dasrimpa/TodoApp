@@ -7,7 +7,8 @@ import { User } from '../../../Interface/Todo.interface';
 import Api from '../../../Api';
 
 const UserLogin: React.FC = () => {
-  const [email] = useState<string>('');
+  const [email,setEmail] = useState<string>('');
+  const [password,setPassword] = useState<string>('');
   const [data, setData] = useState<User[]>([]);
 const navigate = useNavigate();
   const { register, formState: { errors },handleSubmit } = useForm<User>();
@@ -55,7 +56,9 @@ const navigate = useNavigate();
 				</div>
 				<input  {...register("email",{required :true})}
            placeholder='enter your email'
-           className='form-control'/>
+           className='form-control'
+           value={email}
+           onChange={(e)=> setEmail(e.target.value)}/>
 			</div>
       {errors?.email?.type === "required" && (
           <div className='errorMessage'>Email is required.</div>
@@ -70,7 +73,9 @@ const navigate = useNavigate();
 				</div>
 				<input {...register("password", { required: true })}
            placeholder='enter your password'
-           className='form-control'/>
+           className='form-control'
+           value={password}
+           onChange={(e)=> setPassword(e.target.value)}/>
 			</div>
       {errors.password && (
           <div className='errorMessage'>Password is required.</div>

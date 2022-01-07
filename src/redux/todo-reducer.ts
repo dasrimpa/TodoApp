@@ -4,12 +4,17 @@ import { Todo } from "../Interface/Todo.interface";
 const initialState = {
   todoList: [] as Todo[],
 };
+// const initialState: any[] = [
+//   { id: 1, title: "Task 1", completed: false },
+//   { id: 2, title: "Task 2", completed: false },
+// ];
 
 const todoSlice = createSlice({
   name: 'todo',
   initialState,
 
   reducers: {
+    
     listUpdate: (state, { payload } : { payload: Todo[] }) => {
       state.todoList = payload;
     },
