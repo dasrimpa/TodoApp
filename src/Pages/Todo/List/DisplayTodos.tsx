@@ -13,6 +13,7 @@ const DisplayTodos = ({ todos }: {
   todos: Todo[];
 }) => {
   const [data, setData] = useState<Todo[]>([]);
+  const [pageNumber, setPageNumber] = useState(0);
 
   const dispatch = useDispatch();
   // const deleteTodo = React.useCallback(
@@ -20,6 +21,8 @@ const DisplayTodos = ({ todos }: {
   //   [dispatch, removeTodo]
   // );
 
+  const usersPerPage = 3;
+  const pagesVisited = pageNumber * usersPerPage;
   async function fetchData() {
     try {
       const response = await Api.get(`/classes/todo`)
@@ -50,7 +53,7 @@ const deleteTodo =async (objectId: string) => {
 };
 
   const renderTable = () => {
-    return data.map((todo: Todo) => {
+    return data.slice(pagesVisited, pagesVisited + usersPerPage).map((todo: Todo) => {
       return (
         <tr key={todo.objectId}>
           <td>{todo.objectId}</td>
@@ -61,7 +64,11 @@ const deleteTodo =async (objectId: string) => {
       )
     })
   }
-  
+  const pageCount = Math.ceil(data.length / usersPerPage);
+
+  const changePage = (selected :any) => {
+    setPageNumber(selected);
+  };
   return (
     <div className="displaytodos">
     <Link to="/todo/create"><button type="button" className="btn btn-outline-primary list-btn">Add Todo</button></Link>
@@ -116,6 +123,25 @@ const deleteTodo =async (objectId: string) => {
         );
       })
      } */}
+<div className="pagination">
+<nav aria-label="Page navigation example">
+  <ul className="pagination">
+    <li className="page-item">
+      <a className="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li className="page-item"><a className="page-link" href="#">1</a></li>
+    <li className="page-item"><a className="page-link" href="#">2</a></li>
+    <li className="page-item"><a className="page-link" href="#">3</a></li>
+    <li className="page-item">
+      <a className="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+    </div>
     </div>
   );
 };

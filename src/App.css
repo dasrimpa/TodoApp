@@ -9,24 +9,10 @@ span.nav-logo{
   font-size: 25px;
  padding-top: 30px;
  font-weight: bold;
+ color: blue;
 }
 .heading {
   color: blue;
-}
-main > h1 {
-  text-align: center;
- 
-}
-
-.Add-article {
-  margin: 2rem auto;
-  padding: 1rem;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
 }
 
 .Add-article input {
@@ -54,45 +40,6 @@ main > h1 {
   background: #0093b8;
 }
 
-.Add-article button:disabled {
-  background: #d8d8d8;
-  border: 1px solid #d8d8d8;
-  cursor: not-allowed;
-}
-
-.Article {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background: #fff;
-  border-radius: 10px;
-  width: 500px;
-}
-
-.Article:not(:last-child) {
-  border-bottom: 2px solid #f5f6f7;
-}
-
-.Article h1 {
-  color: #222;
-  text-transform: capitalize;
-  font-weight: 700;
-  font-size: 1.7rem;
-}
-
-.Article p {
-  padding-right: 1rem;
-  color: #444;
-}
-.btns{
-  display: flex;
-  justify-content: center;
-}
-.display{
-  display: flex;
-  justify-content: center;
-}
 .buttons{
   margin: 50px 0px 30px 0px;
 }
@@ -115,23 +62,7 @@ main > h1 {
 .all-btn{
   background-color:green;
 }
-.display{
-  display: flex;
-  justify-content: center;
-}
-.text-section{
-  font-size: 15px;
-  font-weight: bold;
-  color:saddlebrown;
-  border-style: none;
-  margin-bottom: 20px;
-}
-.edit-btn{
-color: blue;
-}
-.comp-btn{
-  margin-right: 20px;
-}
+
 button{
   border-style: none;
 }
@@ -146,15 +77,7 @@ button{
 body {
 	font-family: 'Roboto', sans-serif;
 }
-.form-control {
-	font-size: 15px;
-}
-.form-control, .form-control:focus, .input-group-text {
-	border-color: #e1e1e1;
-}
-.form-control, .btn {        
-	border-radius: 3px;
-}
+
 .signup-form {
 	width: 400px;
 	margin: 0 auto;
@@ -214,4 +137,9 @@ body {
 }
 .errorMessage{
   color: red;
+}
+.pagination{
+  justify-content: center;
+  display: flex;
+  margin-top: 30px;
 }
