@@ -25,10 +25,6 @@ export default function AppWrapper() {
               <li className="nav-item">
                 <Link to="/todo/userlogin" className="nav-link">SignIn</Link>
               </li>
-
-              <li className="nav-item">
-                <Link to="/todo/create" className="nav-link">Todo</Link>
-              </li>
              
 
             </ul>

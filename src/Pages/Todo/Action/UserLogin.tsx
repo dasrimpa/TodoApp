@@ -25,19 +25,20 @@ const navigate = useNavigate();
   }
 
   const onSubmit = async () =>{
-    try{
-    const user = data.find(user => user.email === email)
-    if (!user) {
-      alert("error")
-    }
-    else{
-      alert("Login successfull");
-      navigate("/todo/create")
-    }
-  }
-  catch(error){
-    console.log(error)
-  }
+    try {
+      const response = await Api.post("/login",{password:password,email:email},);
+     console.log("response",response);
+     console.log("success");
+      alert(
+        `successfully login!`,
+      );
+      navigate("/todo/create");
+      return true;
+        
+    } catch (error:any) {
+        alert(`Invalid username/password.`);
+        return false;
+    };
   };
 
  
@@ -75,7 +76,8 @@ const navigate = useNavigate();
            placeholder='enter your password'
            className='form-control'
            value={password}
-           onChange={(e)=> setPassword(e.target.value)}/>
+           onChange={(e)=> setPassword(e.target.value)}
+           type="password" />
 			</div>
       {errors.password && (
           <div className='errorMessage'>Password is required.</div>

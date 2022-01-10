@@ -16,7 +16,7 @@ const UserRegistration: React.FC = () => {
   const onSubmit = async () => {
 
     try {
-      const response = await Api.post("/classes/Userdetails",{username:name,password:password,email:email
+      const response = await Api.post("/users",{username:name,password:password,email:email
      },);
      console.log("response",response);
      console.log("success");
@@ -27,7 +27,7 @@ const UserRegistration: React.FC = () => {
       return true;
         
     } catch (error:any) {
-        alert(`Error! ${error}`);
+        alert(`Account already exists for this username.`);
         return false;
     };
   };
@@ -48,7 +48,7 @@ const UserRegistration: React.FC = () => {
 				</div>
 				<input {...register("name", { required: true, pattern: /[A-Za-z]/})}
            onChange={(e) => setName(e.target.value)}
-           placeholder='Enter Full Name'
+           placeholder='Enter username'
            className="form-control" />
 			</div>
       {errors.name && <div className='errorMessage'>Name is required.</div>}
@@ -87,7 +87,8 @@ const UserRegistration: React.FC = () => {
 				<input {...register("password", { required: true })}
            onChange={(e) => setPassword(e.target.value)}
            placeholder='Enter Password'
-           className='form-control'/>
+           className='form-control'
+           type="password"/>
 			</div>
       {errors.password && (
           <div className='errorMessage'>Password is required.</div>

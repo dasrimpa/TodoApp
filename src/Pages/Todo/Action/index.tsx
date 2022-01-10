@@ -101,6 +101,23 @@ const TodoForm = ({
   const submit = () => {
     params.objectId ? updateTodoCallBack() : addList();
   };
+  const onSubmit = async () => {
+
+    try {
+      const response = await Api.post("/logout");
+     console.log("response",response);
+     console.log("success");
+      alert(
+        `successfully created!`,
+      );
+      navigate("/todo/userlogin");
+      return true;
+        
+    } catch (error:any) {
+        alert(`Account already exists for this username.`);
+        return false;
+    };
+  };
 
   const setTitleText = (titleText: string) => {
     setTitle(titleText);
@@ -124,6 +141,7 @@ const TodoForm = ({
         <button className="add-btn" onClick={() => submit()}>
           {params.objectId ? "Update" : "Create"} Todo
         </button>
+        <button  onClick={() => onSubmit()}>Logout</button>
       </div>
     </div>
   );
