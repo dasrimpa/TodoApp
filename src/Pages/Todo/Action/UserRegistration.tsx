@@ -11,9 +11,9 @@ const UserRegistration: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const { register, formState: { errors },handleSubmit } = useForm<User>();
-  const onSubmit = async () =>{
+  const onSubmit = async () => {
 
     try {
       const response = await Api.post("/classes/Userdetails",{username:name,password:password,email:email
@@ -81,7 +81,6 @@ const navigate = useNavigate();
 			<div className="input-group">
 				<div className="input-group-prepend">
 					<span className="input-group-text">
-						<i className="fa fa-lock"></i>
 					<RiLockPasswordFill/>
 					</span>                    
 				</div>

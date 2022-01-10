@@ -21,7 +21,7 @@ const DisplayTodos = ({ todos }: {
   //   [dispatch, removeTodo]
   // );
 
-  const usersPerPage = 3;
+  const usersPerPage = 10;
   const pagesVisited = pageNumber * usersPerPage;
   async function fetchData() {
     try {
