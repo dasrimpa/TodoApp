@@ -9,20 +9,8 @@ import Api from '../../../Api';
 const UserLogin: React.FC = () => {
   const [email,setEmail] = useState<string>('');
   const [password,setPassword] = useState<string>('');
-  const [data, setData] = useState<User[]>([]);
 const navigate = useNavigate();
   const { register, formState: { errors },handleSubmit } = useForm<User>();
-
-  async function getData() {
-    try {
-      const response = await Api.get(`/classes/Userdetails`)
-      console.log(response.data.results);
-      const result = response.data.results;
-      setData(result);
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   const onSubmit = async () =>{
     try {

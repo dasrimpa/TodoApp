@@ -18,6 +18,7 @@ const todoSlice = createSlice({
     listUpdate: (state, { payload } : { payload: Todo[] }) => {
       state.todoList = payload;
     },
+    
     addTodo: (state, { payload }: { payload: Todo }) => {
       state.todoList.push(payload);
       return state;

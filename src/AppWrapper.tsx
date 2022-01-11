@@ -5,6 +5,7 @@ import TodoWrapper from "./Pages/Todo/TodoWrapper";
 import TodoForm from "./Pages/Todo/Action";
 import  UserRegistration  from "./Pages/Todo/Action/UserRegistration";
 import UserLogin  from "./Pages/Todo/Action/UserLogin";
+import PrivateRoute from "./Pages/Todo/Action/PrivateRoute";
 
 export default function AppWrapper() {
   return (
@@ -25,8 +26,10 @@ export default function AppWrapper() {
               <li className="nav-item">
                 <Link to="/todo/userlogin" className="nav-link">SignIn</Link>
               </li>
-             
-
+              
+              <li className="nav-item">
+                <Link to="/todo/create" className="nav-link">Todo</Link>
+              </li>
             </ul>
           </div>
         </nav>
@@ -37,6 +40,9 @@ export default function AppWrapper() {
             <Route path="edit/:objectId" element={<TodoForm />} />
             <Route path="userregistration" element={<UserRegistration />} />
             <Route path="userlogin" element={<UserLogin />} />
+            <Route path="privateroute" element={<PrivateRoute/>}>
+            <Route path="create" element={<TodoForm />} />
+            </Route>
           </Route>
         </Routes>
       </div>
