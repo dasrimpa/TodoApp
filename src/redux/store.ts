@@ -4,7 +4,7 @@ import authReducer from "./auth-reducer";
 
 const store = configureStore({
   reducer: {
-    todos: todoReducer,
+    todo: todoReducer,
     auth: authReducer
   },
 });

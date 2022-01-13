@@ -1,10 +1,10 @@
 import React from 'react'
-import DisplayTodos from './DisplayTodos'
+import DisplayTodo from './DisplayTodos'
 
 export const TodoList = () => {
   return (
     <div>
-      <DisplayTodos/>
+      <DisplayTodo/>
     </div>
   )
 }

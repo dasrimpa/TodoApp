@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -9,7 +8,7 @@ import { todoActions } from "../../../redux/todo-reducer";
 
 const mapStateToProps = (state: RootState) => {
   return {
-    todoList: state.todos.todoList,
+    todoList: state.todo.todoList,
   };
 };
 

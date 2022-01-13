@@ -9,8 +9,8 @@ import { BiEdit } from "react-icons/bi";
 import { BsFillArchiveFill } from "react-icons/bs";
 import Api from "../../../Api";
 
-const DisplayTodos = ({ todos }: { 
-  todos: Todo[];
+const DisplayTodo = ({ todo }: { 
+  todo: Todo[];
 }) => {
   const [data, setData] = useState<Todo[]>([]);
   const [pageNumber, setPageNumber] = useState(0);
@@ -148,10 +148,10 @@ const deleteTodo =async (objectId: string) => {
 
 const mapStateToProps = (state: RootState) => {
   return {
-    todos: state.todos.todoList,
+    todo: state.todo.todoList,
   };
 };
 
-export default connect(mapStateToProps)(DisplayTodos);
+export default connect(mapStateToProps)(DisplayTodo);
 
 

@@ -8,6 +8,14 @@ import Api from '../../../Api';
 import { RootState } from '../../../redux/store';
 import { authActions } from '../../../redux/auth-reducer';
 import { connect } from 'react-redux';
+import * as yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup';
+
+
+const schema = yup.object({
+  email: yup.string().required(),
+  password: yup.string().required(),
+}).required();
 
 
   function UserLogin ({ setUser }: {
@@ -16,7 +24,9 @@ import { connect } from 'react-redux';
   const [email,setEmail] = useState<string>('');
   const [password,setPassword] = useState<string>('');
   const navigate = useNavigate();
-  const { register, formState: { errors },handleSubmit } = useForm<User>();
+  const { register, formState: { errors },handleSubmit } = useForm<User>({
+    resolver: yupResolver(schema),
+  });
 
   const onSubmit = async () => {
     try {
@@ -27,6 +37,7 @@ import { connect } from 'react-redux';
       alert(
         `successfully login!`,
       );
+
       navigate("/todo/create");
       
       return true;
@@ -51,13 +62,13 @@ import { connect } from 'react-redux';
 						<MdEmail />
 					</span>                    
 				</div>
-				<input  {...register("email",{required :true})}
+				<input  {...register("email")}
            placeholder='enter your email'
            className='form-control'
            value={email}
            onChange={(e)=> setEmail(e.target.value)}/>
 			</div>
-      {errors?.email?.type === "required" && (
+      {errors.email && (
           <div className='errorMessage'>Email is required.</div>
         )}
         </div>
@@ -68,7 +79,7 @@ import { connect } from 'react-redux';
 					<RiLockPasswordFill/>
 					</span>                    
 				</div>
-				<input {...register("password", { required: true })}
+				<input {...register("password")}
            placeholder='enter your password'
            className='form-control'
            value={password}

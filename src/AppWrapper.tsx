@@ -41,7 +41,7 @@ export default function AppWrapper() {
             <Route path="edit/:objectId" element={<TodoForm />} />
             <Route path="userregistration" element={<UserRegistration />} />
             <Route path="userlogin" element={<UserLogin />} />
-            <Route path="privateroute" element={<PrivateRoute/>}>
+            <Route path="" element={<PrivateRoute/>}>
             <Route path="create" element={<TodoForm />} />
             </Route>
           </Route>

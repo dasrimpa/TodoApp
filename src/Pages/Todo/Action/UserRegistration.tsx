@@ -7,7 +7,7 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { User } from '../../../Interface/Todo.interface';
 
-const UserRegistration: React.FC = () => {
+  const UserRegistration: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
