@@ -27,7 +27,7 @@ const UserRegistration: React.FC = () => {
       return true;
         
     } catch (error:any) {
-        alert(`Account already exists for this username.`);
+        alert(`Account already exists for this email.`);
         return false;
     };
   };

@@ -1,14 +1,14 @@
 import React from "react";
 import { useSelector } from 'react-redux';
 
-import { RootState } from './../../../redux/store';
+import { RootState } from '../../../redux/store';
 import { Navigate, Outlet } from 'react-router-dom';
-
 
 const PrivateRoute =() => {
   const auth= useSelector((state: RootState) =>state.auth);
 
   return auth.user ?  <Outlet /> : <Navigate to ='/userlogin' />
+  
 };
 
   export default PrivateRoute;
