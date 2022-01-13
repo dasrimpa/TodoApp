@@ -1,21 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { User } from "../Interface/Todo.interface";
+import { CurrentUser, User } from "../Interface/Todo.interface";
 
-const initialState = {
-  user: [] as User[],
+interface AuhState {
+  user: CurrentUser | null; 
+}
+const initialState: AuhState = {
+  user: null,
 };
 
-const authslice = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser: (state, { payload }: { payload: User }) => {
-      state.user.push(payload);
+    setUser: (state, { payload }: { payload: CurrentUser }) => {
+      state.user = payload;
       return state;
     },
   },
 });
 
-export const authActions = authslice.actions;
+export const authActions = authSlice.actions;
 
-export default authslice.reducer;
+export default authSlice.reducer;

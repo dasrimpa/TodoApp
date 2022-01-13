@@ -3,25 +3,16 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { User } from '../../../Interface/Todo.interface';
+import { CurrentUser, User } from '../../../Interface/Todo.interface';
 import Api from '../../../Api';
 import { RootState } from '../../../redux/store';
 import { authActions } from '../../../redux/auth-reducer';
 import { connect } from 'react-redux';
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    authuser: state.auth.user,
-  };
-};
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    setUser: (user: User) => dispatch(authActions.setUser(user)),
-  };
-};
-
-  const UserLogin: React.FC = () => {
+  function UserLogin ({ setUser }: {
+    setUser: (user: CurrentUser) => void
+  }) {
   const [email,setEmail] = useState<string>('');
   const [password,setPassword] = useState<string>('');
   const navigate = useNavigate();
@@ -30,11 +21,7 @@ const mapDispatchToProps = (dispatch: any) => {
   const onSubmit = async () => {
     try {
       const response = await Api.post("/login",{password:password,email:email},);
-      setUser({
-          completed: false,
-          email,
-          password,
-        });
+      setUser(response.data);
      console.log("response",response);
      console.log("success");
       alert(
@@ -102,5 +89,17 @@ const mapDispatchToProps = (dispatch: any) => {
   );
 };
 
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    authuser: state.auth.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    setUser: (user: CurrentUser) => dispatch(authActions.setUser(user)),
+  };
+};
 export default connect(mapStateToProps, mapDispatchToProps)(UserLogin);
 
