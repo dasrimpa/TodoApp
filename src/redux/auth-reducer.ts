@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CurrentUser } from "../Interface/Todo.interface";
+import { CurrentUser } from "Interface/CurrentUser.interface";
 
 interface AuhState {
   user: CurrentUser | null; 

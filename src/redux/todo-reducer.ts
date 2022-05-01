@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Todo } from "../Interface/Todo.interface";
+import { Todo } from "Interface/Todo.interface";
 
 const initialState = {
   todoList: [] as Todo[],

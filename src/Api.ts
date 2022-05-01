@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://parseapi.back4app.com",
+  baseURL: process.env.baseURL,
   headers: {
     "Accept": "application/json",
     "Content-type": "application/json",

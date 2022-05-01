@@ -1,10 +1,11 @@
+import Api from "Api";
+import { Todo } from "Interface/Todo.interface";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { RootState } from "../../../redux/store";
-import { Todo } from "../../../Interface/Todo.interface";
-import Api from "../../../Api";
-import { todoActions } from "../../../redux/todo-reducer";
+import { RootState } from "redux/store";
+import { todoActions } from "redux/todo-reducer";
+import { routes } from "routes";
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -79,7 +80,7 @@ const TodoForm = ({
         completed: false,
       });
       alert("updated Successfully");
-      navigate("/todo/list");
+      navigate("/list");
     } catch (error) {
       console.log(error);
     }
@@ -95,22 +96,20 @@ const TodoForm = ({
         setSelectedTodo(todoItem);
       }
     }
-  }, []);
+  }, [params.objectId, todoList]);
 
   const submit = () => {
     params.objectId ? updateTodoCallBack() : addList();
   };
   const onSubmit = async () => {
-
     try {
       const response = await Api.post("/logout");
-     console.log("response",response);
-      navigate("/todo/userlogin");
+      console.log("response", response);
+      navigate(routes.login);
       return true;
-        
-    } catch (error:any) {
-        return false;
-    };
+    } catch (error: any) {
+      return false;
+    }
   };
 
   const setTitleText = (titleText: string) => {
@@ -118,7 +117,7 @@ const TodoForm = ({
   };
   return (
     <div className="addTodos">
-      <Link to="/todo/list">
+      <Link to="/list">
         <button type="button" className="btn btn-outline-primary list-btn">
           Todo List
         </button>
@@ -135,7 +134,9 @@ const TodoForm = ({
         <button className="add-btn" onClick={() => submit()}>
           {params.objectId ? "Update" : "Create"} Todo
         </button>
-        <button className="logout-btn" onClick={() => onSubmit()}>Logout</button>
+        <button className="logout-btn" onClick={() => onSubmit()}>
+          Logout
+        </button>
       </div>
     </div>
   );

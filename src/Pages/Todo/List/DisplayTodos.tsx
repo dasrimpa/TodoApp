@@ -2,18 +2,16 @@
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Todo } from "../../../Interface/Todo.interface";
-import { RootState } from "../../../redux/store";
-import  { todoActions} from "../../../redux/todo-reducer";
 import { BiEdit } from "react-icons/bi";
 import { BsFillArchiveFill } from "react-icons/bs";
-import Api from "../../../Api";
+import Api from "Api";
+import { Todo } from "Interface/Todo.interface";
+import { RootState } from "redux/store";
+import { todoActions } from "redux/todo-reducer";
+import { routes } from "routes";
 
-const DisplayTodo = ({ todo }: { 
-  todo: Todo[];
-}) => {
+const DisplayTodo = ({ todo }: { todo: Todo[] }) => {
   const [data, setData] = useState<Todo[]>([]);
-  const [pageNumber, setPageNumber] = useState(0);
 
   const dispatch = useDispatch();
   // const deleteTodo = React.useCallback(
@@ -21,11 +19,9 @@ const DisplayTodo = ({ todo }: {
   //   [dispatch, removeTodo]
   // );
 
-  const usersPerPage = 10;
-  const pagesVisited = pageNumber * usersPerPage;
   async function fetchData() {
     try {
-      const response = await Api.get(`/classes/todo`)
+      const response = await Api.get(`/classes/todo`);
       console.log(response.data.results);
       console.log("success");
       const result = response.data.results;
@@ -38,72 +34,68 @@ const DisplayTodo = ({ todo }: {
 
   useEffect(() => {
     fetchData();
-  }, [])
+  }, []);
 
-const deleteTodo =async (objectId: string) => {
-
-  try{
-  await Api.delete(`/classes/todo/${objectId}`);
-  const filteredItems = data.filter((todo => todo.objectId !== objectId));
-  setData(filteredItems);
-  }
-  catch (error) {
-    console.log(error)
-  }
-};
+  const deleteTodo = async (objectId: string) => {
+    try {
+      await Api.delete(`/classes/todo/${objectId}`);
+      const filteredItems = data.filter((todo) => todo.objectId !== objectId);
+      setData(filteredItems);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const renderTable = () => {
-    return data.slice(pagesVisited, pagesVisited + usersPerPage).map((todo: Todo) => {
+    return data.map((todo: Todo) => {
       return (
         <tr key={todo.objectId}>
           <td>{todo.objectId}</td>
           <td>{todo.title}</td>
-          <td><Link to={`/todo/edit/${todo.objectId}`}><BiEdit className="edit-btn"/></Link></td>
-          <td><button onClick={() => deleteTodo(String(todo.objectId))}><BsFillArchiveFill className="delete-btn"/></button></td>
+          <td>
+            <Link to={`/edit/${todo.objectId}`}>
+              <BiEdit className="edit-btn" />
+            </Link>
+          </td>
+          <td>
+            <button onClick={() => deleteTodo(String(todo.objectId))}>
+              <BsFillArchiveFill className="delete-btn" />
+            </button>
+          </td>
         </tr>
-      )
-    })
-  }
-  const pageCount = Math.ceil(data.length / usersPerPage);
-
-  const changePage = (selected :any) => {
-    setPageNumber(selected);
+      );
+    });
   };
+
   return (
     <div className="displaytodos">
-    <Link to="/todo/create"><button type="button" className="btn btn-outline-primary list-btn">Add Todo</button></Link>
-    <h2>Todo List</h2>
+      <Link to={routes.todoForm}>
+        <button type="button" className="btn btn-outline-primary list-btn">
+          Add Todo
+        </button>
+      </Link>
+      <h2>Todo List</h2>
       <div className="buttons">
-        <button className="active-btn btn">
-          Active
-        </button>
+        <button className="active-btn btn">Active</button>
 
-        <button
-          className="complete-btn btn"
-        >
-          Completed
-        </button>
+        <button className="complete-btn btn">Completed</button>
 
-        <button className="all-btn btn">
-          All
-        </button>
+        <button className="all-btn btn">All</button>
       </div>
 
       <table className="table container table-striped table-hover">
-  <thead className="table-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Edit Item</th>
-      <th scope="col">Delete Item</th>
-    </tr>
-  </thead>
-  <tbody>
-  {renderTable()}
-  </tbody>
-</table>
+        <thead className="table-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Edit Item</th>
+            <th scope="col">Delete Item</th>
+          </tr>
+        </thead>
+        <tbody>{renderTable()}</tbody>
+      </table>
 
-     {/* {
+      {/* {
        data.map((todo: Todo) => {
         return (
           <div className="d-flex justify-content-center">
@@ -123,25 +115,31 @@ const deleteTodo =async (objectId: string) => {
         );
       })
      } */}
-<div className="pagination">
-<nav aria-label="Page navigation example">
-  <ul className="pagination">
-    <li className="page-item">
-      <a className="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li className="page-item"><a className="page-link" href="#">1</a></li>
-    <li className="page-item"><a className="page-link" href="#">2</a></li>
-    <li className="page-item"><a className="page-link" href="#">3</a></li>
-    <li className="page-item">
-      <a className="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-    </div>
+      <div className="pagination">
+        <nav aria-label="Page navigation example">
+          <ul className="pagination">
+            <li className="page-item">
+              <div className="page-link" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </div>
+            </li>
+            <li className="page-item">
+              <div className="page-link">1</div>
+            </li>
+            <li className="page-item">
+              <div className="page-link">2</div>
+            </li>
+            <li className="page-item">
+              <div className="page-link">3</div>
+            </li>
+            <li className="page-item">
+              <div className="page-link" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   );
 };
@@ -153,5 +151,3 @@ const mapStateToProps = (state: RootState) => {
 };
 
 export default connect(mapStateToProps)(DisplayTodo);
-
-
